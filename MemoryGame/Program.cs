@@ -1,7 +1,9 @@
-﻿public class Program
+﻿using MemoryGame;
+
+public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("s");
+        WordsList wordsList = new();
     }
 }
