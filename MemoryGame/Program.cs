@@ -11,5 +11,7 @@ public class Program
         Easy easy = new();
         var board = new Boards(wordsList, easy);
         TableView.ShowBoard(board);
+
+        ReceiveData.Receive();
     }
 }
