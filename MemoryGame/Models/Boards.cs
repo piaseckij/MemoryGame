@@ -15,11 +15,14 @@ public class Boards
 
     public void FillTheBoard(int wordsNumber)
     {
+        int[] wordIndex = new int[20];
         var rnd = new Random();
         for (var i = 0; i < wordsNumber; i++)
         {
-            Board.Add(_wordsList.Words[rnd.Next(1, 100)]);
-            Console.WriteLine(Board);
+            wordIndex[i] = rnd.Next(1, 100);
+            Board.Add(_wordsList.Words[wordIndex[i]]);
+            Board.Add(_wordsList.Words[wordIndex[i]]);
+
         }
     }
 }
