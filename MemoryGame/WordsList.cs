@@ -13,7 +13,7 @@ public class WordsList
     private void ReadWords()
     {
         //ToDo Zmienić ścieżkę
-        foreach (var line in File.ReadAllLines(@"C:\Users\Kuba\source\repos\MemoryGame\MemoryGame\Words.txt"))
+        foreach (var line in File.ReadAllLines(@"C:\Users\Kuba\source\repos\MemoryGame\MemoryGame\Resources\Words.txt"))
         {
             Words.Add(new Word(line));
         }

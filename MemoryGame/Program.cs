@@ -1,11 +1,13 @@
 ﻿using MemoryGame;
 using MemoryGame.Models;
+using MemoryGame.Models.Difficulties;
 
 public class Program
 {
     public static void Main(string[] args)
     {
         WordsList wordsList = new();
-        Boards board = new Boards(wordsList);
+        Easy easy = new();
+        var board = new Boards(wordsList, easy);
     }
 }
