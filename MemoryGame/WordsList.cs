@@ -4,7 +4,7 @@ namespace MemoryGame;
 
 public class WordsList
 {
-    public List<Word> words = new();
+    public List<Word> Words = new();
 
     public WordsList()
     {
@@ -15,7 +15,7 @@ public class WordsList
         //ToDo Zmienić ścieżkę
         foreach (var line in File.ReadAllLines(@"C:\Users\Kuba\source\repos\MemoryGame\MemoryGame\Words.txt"))
         {
-            words.Add(new Word(line));
+            Words.Add(new Word(line));
         }
     }
 }
