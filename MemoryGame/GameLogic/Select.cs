@@ -13,10 +13,15 @@ namespace MemoryGame.GameLogic
         public static void SelectField(UserSelection selection, Boards board)
         {
             
-            //range 0 to 4
-            if (selection.Line == 0)
+            if (selection.Line == 'A')
             {
-                
+                board.Board[0][selection.Column-1].IsSelected=!board.Board[0][selection.Column-1].IsSelected;
+            }
+
+            if (selection.Line == 'B')
+            {
+                board.Board[1][selection.Column - 1].IsSelected=!board.Board[1][selection.Column - 1].IsSelected;
+
             }
         }
     }

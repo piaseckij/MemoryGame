@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MemoryGame.Models.Difficulties
 {
-    public class Hards:IDifficulty
+    public class Hard:IDifficulty
     {
         public int Tries { get; set; } = 15;
         public int WordsNumber { get; set; } = 8;

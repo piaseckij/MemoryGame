@@ -9,5 +9,5 @@ public class Word
 
     public string Text { get; set; }
     public bool IsGuessed { get; set; } = false;
-    public bool IsSelected { get; set; } = false;
+    public bool IsSelected { get; set; } = true;
 }

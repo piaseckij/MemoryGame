@@ -1,5 +1,4 @@
-﻿using System.Data;
-using MemoryGame.Models.Difficulties;
+﻿using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.Models;
 
@@ -16,18 +15,16 @@ public class Boards
 
     public void FillTheBoard(WordsList words)
     {
-        
         var rnd = new Random();
-        for (var i = 0; i <2; i++)
+        for (var i = 0; i < 2; i++)
         {
-            List<Word> row = new List<Word>();
-            for (var j = 0; j <words.Words.Count; j++)
+            var row = new List<Word>();
+
+            for (var j = 0; j < words.Words.Count; j++)
             {
-                row.Add(_wordsList.Words[j]);
+                row.Add(new Word(_wordsList.Words[j]));
             }
-            
             Board.Add(row);
         }
-
     }
 }
