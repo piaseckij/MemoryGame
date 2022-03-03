@@ -7,11 +7,11 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        WordsList wordsList = new();
         Easy easy = new();
-        var board = new Boards(wordsList, easy);
+        WordsList words = new WordsList(easy);
+        var board = new Boards(words, easy);
         TableView.ShowBoard(board);
 
-        ReceiveData.Receive();
+        //ReceiveData.Receive();
     }
 }

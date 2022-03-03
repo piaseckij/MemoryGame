@@ -1,28 +1,33 @@
-﻿using MemoryGame.Models.Difficulties;
+﻿using System.Data;
+using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.Models;
 
 public class Boards
 {
     private readonly WordsList _wordsList;
-    public List<Word> Board = new();
+    public List<List<Word>> Board = new();
 
     public Boards(WordsList wordsList, IDifficulty difficulty)
     {
         _wordsList = wordsList;
-        FillTheBoard(difficulty.WordsNumber);
+        FillTheBoard(_wordsList);
     }
 
-    public void FillTheBoard(int wordsNumber)
+    public void FillTheBoard(WordsList words)
     {
-        int[] wordIndex = new int[20];
+        
         var rnd = new Random();
-        for (var i = 0; i < wordsNumber; i++)
+        for (var i = 0; i <2; i++)
         {
-            wordIndex[i] = rnd.Next(1, 100);
-            Board.Add(_wordsList.Words[wordIndex[i]]);
-            Board.Add(_wordsList.Words[wordIndex[i]]);
-
+            List<Word> row = new List<Word>();
+            for (var j = 0; j <words.Words.Count; j++)
+            {
+                row.Add(_wordsList.Words[j]);
+            }
+            
+            Board.Add(row);
         }
+
     }
 }
