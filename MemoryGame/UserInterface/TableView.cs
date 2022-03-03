@@ -6,11 +6,9 @@ public static class TableView
 {
     public static void ShowBoard(Boards board)
     {
-        List<List<Word>> _board = new();
 
-        _board = board.Board;
 
-        foreach (var row in _board)
+        foreach (var row in board.Board)
         {
             foreach (var field in row)
                 if (field.IsGuessed || field.IsSelected)

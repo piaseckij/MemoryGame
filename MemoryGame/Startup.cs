@@ -15,7 +15,7 @@ namespace MemoryGame
         {
             var difficulty = ReceiveData.ReceiveDifficulty();
 
-            var board = new Boards( difficulty);
+            var board = new Boards(difficulty);
             TableView.ShowBoard(board);
         }
     }
