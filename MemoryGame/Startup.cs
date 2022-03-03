@@ -14,8 +14,8 @@ namespace MemoryGame
         public void Start()
         {
             var difficulty = ReceiveData.ReceiveDifficulty();
-            var words = new WordsList(difficulty);
-            var board = new Boards(words, difficulty);
+
+            var board = new Boards( difficulty);
             TableView.ShowBoard(board);
         }
     }

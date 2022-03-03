@@ -7,9 +7,9 @@ public class Boards
     private readonly WordsList _wordsList;
     public List<List<Word>> Board = new();
 
-    public Boards(WordsList wordsList, IDifficulty difficulty)
+    public Boards( IDifficulty difficulty)
     {
-        _wordsList = wordsList;
+        _wordsList = new WordsList(difficulty);
         FillTheBoard(_wordsList);
     }
 
