@@ -1,14 +1,27 @@
-﻿using MemoryGame.Models;
+﻿using System.Runtime.Serialization.Formatters;
+using MemoryGame.Models;
+using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.UserInterface;
 
-public static class TableView
+public class TableView
 {
-    public static void ShowBoard(Boards board)
+    private readonly Boards _board;
+    private readonly IDifficulty _difficulty;
+
+    public TableView(Boards board, IDifficulty difficulty)
     {
+        _board = board;
+        _difficulty = difficulty;
+    }
+    public void ShowBoard()
+    {
+        Console.WriteLine("---------------------");
+        Console.WriteLine($"Level: {_difficulty.Name}");
+        Console.WriteLine($"Tries left: {_difficulty.Tries}");
+        Console.WriteLine("---------------------\n");
 
-
-        foreach (var row in board.Board)
+        foreach (var row in _board.Board)
         {
             foreach (var field in row)
                 if (field.IsGuessed || field.IsSelected)

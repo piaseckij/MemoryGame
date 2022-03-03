@@ -8,9 +8,9 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Startup start = new Startup();
+        Game game = new Game();
+        game.StartGame();
 
-        start.Start();
-        
+
     }
 }

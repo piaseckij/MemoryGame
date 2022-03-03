@@ -1,21 +1,20 @@
 ﻿using MemoryGame.Models;
-using MemoryGame.Models.Difficulties;
 using MemoryGame.UserInterface;
 
 namespace MemoryGame.GameLogic;
 
 public class Move
 {
-    public static bool MakeMove(Boards board)
+    public static List<Word> MakeMove(Boards board, List<UserSelection> userSelections)
     {
-         
-        var selectedWord1=Select.SelectField(ReceiveData.ReceiveField(), board);
-        var selectedWord2 = Select.SelectField(ReceiveData.ReceiveField(), board);
+        var selectedWord1 = Select.SelectField(userSelections[0], board);
+        var selectedWord2 = Select.SelectField(userSelections[1], board);
 
-        if (selectedWord1.Equals(selectedWord2))
+        List<Word> selectedWords = new()
         {
-            return true;
-        }
-        return false;
+            selectedWord1,
+            selectedWord2
+        };
+        return selectedWords;
     }
 }

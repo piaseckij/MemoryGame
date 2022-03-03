@@ -6,23 +6,28 @@ namespace MemoryGame.UserInterface;
 
 public class ReceiveData
 {
-    public static UserSelection ReceiveField()
+    public static List<UserSelection> ReceiveField()
     {
-        Console.WriteLine("Select Field: ");
-        var input = Console.ReadLine();
-
-        if (input is null) throw new NullInputException("Input cannot be null");
-
-        var row = input[0];
-
-        var success = int.TryParse("" + input[1], out var column);
-        if (success)
+        List<UserSelection> output = new();
+        for (var i = 0; i < 2; i++)
         {
-            return new UserSelection(row, column);
+            Console.WriteLine("Select Field: ");
+            var input = Console.ReadLine();
+
+            if (input is null) throw new NullInputException("Input cannot be null");
+
+            var row = input[0];
+            var success = int.TryParse("" + input[1], out var column);
+            if (!success)
+            {
+                Console.WriteLine("Bad Input");
+                throw new BadInputException("Wrong Input");
+            }
+
+            output.Add(new UserSelection(row, column));
         }
 
-        Console.WriteLine("Bad Input");
-        throw new BadInputException("Wrong Input");
+        return output;
     }
 
     public static IDifficulty ReceiveDifficulty()
@@ -31,7 +36,7 @@ public class ReceiveData
         Console.WriteLine("1. Easy");
         Console.WriteLine("2. Hard");
 
-        string? input = Console.ReadLine();
+        var input = Console.ReadLine();
 
         if (input is null)
         {
@@ -40,7 +45,7 @@ public class ReceiveData
         }
 
         var success = int.TryParse(input, out var level);
-        if (!success||level.ToString().Length!>1)
+        if (!success || level.ToString().Length! > 1)
         {
             Console.WriteLine("Wrong input");
             throw new BadInputException("Wrong Input");
@@ -55,6 +60,5 @@ public class ReceiveData
         }
 
         throw new BadInputException("Wrong Input");
-
     }
 }
