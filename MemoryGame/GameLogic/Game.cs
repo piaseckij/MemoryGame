@@ -42,12 +42,17 @@ public class Game
                 TableView.ShowBoard();
                 Scoring.RemoveTry();
             }
-        }while(Difficulty.Tries>0&&Win!=true);
+            else if(selectedWords[0].Equals(selectedWords[1]))
+            {
+                selectedWords[0].IsGuessed = true;
+                selectedWords[1].IsGuessed = true;
+            }
 
-        //if (!result)
-        //{
-        //    scoring.RemoveTry();
-        //    
-        //}
+            Win=WinChecking.CheckWin(Board);
+        }while(Difficulty.Tries>0&&Win!=true);
+        Console.Clear();
+        Console.WriteLine($"Win in: {Scoring.StopScoring()} seconds");
+        Console.WriteLine($"{Difficulty.Tries} Tries left");
+
     }
 }
