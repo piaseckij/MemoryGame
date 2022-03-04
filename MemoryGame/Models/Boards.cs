@@ -5,26 +5,36 @@ namespace MemoryGame.Models;
 public class Boards
 {
     private readonly WordsList _wordsList;
-    public List<List<Word>> Board = new();
+    public readonly List<List<Word>> Board = new();
 
-    public Boards( IDifficulty difficulty)
+    public Boards(IDifficulty difficulty)
     {
         _wordsList = new WordsList(difficulty);
-        FillTheBoard(_wordsList);
+        FillTheBoard();
+        RandomizeBoard();
     }
 
-    public void FillTheBoard(WordsList words)
+    private void FillTheBoard()
     {
         var rnd = new Random();
         for (var i = 0; i < 2; i++)
         {
-            var row = new List<Word>();
+            var row = _wordsList.Words.Select(t => new Word(t)).ToList();
 
-            for (var j = 0; j < words.Words.Count; j++)
-            {
-                row.Add(new Word(_wordsList.Words[j]));
-            }
             Board.Add(row);
+        }
+    }
+
+    private void RandomizeBoard()
+    {
+        var rnd = new Random();
+
+        for (var i = 0; i < Board.Count; i++)
+        {
+            var newRow = Board[i].OrderBy(item => rnd.Next());
+            var temp = newRow.ToList();
+
+            Board[i] = temp;
         }
     }
 }
