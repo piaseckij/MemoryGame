@@ -6,7 +6,7 @@ public class WordsList
 {
     private readonly List<string> _wordsFromFile = new();
 
-    //public List<Word> Words = new();
+
     public List<string> Words = new();
 
     public WordsList(IDifficulty difficulty)
@@ -19,7 +19,7 @@ public class WordsList
     private void ReadWordsFromFile()
     {
         //ToDo Zmienić ścieżkę
-        foreach (var line in File.ReadAllLines(@"C:\Users\Kuba\source\repos\MemoryGame\MemoryGame\Resources\Words.txt"))
+        foreach (var line in File.ReadAllLines(@"..\..\..\Resources\Words.txt"))
             _wordsFromFile.Add(line);
     }
 

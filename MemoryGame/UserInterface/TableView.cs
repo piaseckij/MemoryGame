@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization.Formatters;
-using MemoryGame.Models;
+﻿using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.UserInterface;
@@ -14,32 +13,39 @@ public class TableView
         _board = board;
         _difficulty = difficulty;
     }
+
     public void ShowBoard()
     {
+        var index = 0;
         Console.WriteLine("---------------------");
         Console.WriteLine($"Level: {_difficulty.Name}");
         Console.WriteLine($"Tries left: {_difficulty.Tries}");
         Console.WriteLine("---------------------\n");
 
+        Console.Write("   ");
+        for (int j = 0; j < _board.Board[0].Count; j++)
+        {
+            
+            Console.Write((string)($"{1 + j}             "));
+        }
+        Console.WriteLine();
         foreach (var row in _board.Board)
         {
+            Console.Write((char)('A'+index)+"  ");
             foreach (var field in row)
                 if (field.IsGuessed || field.IsSelected)
                 {
-                    string output = field.Text.ToString();
-                    while (output.Length<14)
-                    {
-                        output=output + " ";
-                    }
+                    var output = field.Text;
+                    while (output.Length < 14) output = output + " ";
                     Console.Write(output);
-
                 }
                 else
                 {
-                    Console.Write("X" + "        ");
+                    Console.Write("X" + "             ");
                 }
 
             Console.WriteLine();
+            index++;
         }
     }
 }

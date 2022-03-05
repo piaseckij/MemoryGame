@@ -21,7 +21,7 @@ public class ReceiveData
         {
             for (var i = 0; i < 2; i++)
             {
-                Console.WriteLine("Select Field: ");
+                Console.WriteLine("\nSelect Field: (ex.A1)");
                 var input = Console.ReadLine();
                 var row = 0;
 
