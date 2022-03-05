@@ -3,7 +3,7 @@ using MemoryGame.UserInterface;
 
 namespace MemoryGame.GameLogic;
 
-public class Move
+public static class Move
 {
     public static List<Word> MakeMove(Boards board, List<UserSelection> userSelections)
     {

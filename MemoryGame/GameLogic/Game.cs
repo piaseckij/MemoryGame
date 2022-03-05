@@ -1,5 +1,4 @@
-﻿using MemoryGame.Exceptions;
-using MemoryGame.Models;
+﻿using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 using MemoryGame.UserInterface;
 
@@ -15,7 +14,11 @@ public class Game
         Board = new Boards(Difficulty);
         TableView = new TableView(Board, Difficulty);
         Scoring = new Scoring(Difficulty);
+        DataReceiver = new ReceiveData(Board);
+
     }
+
+    private ReceiveData DataReceiver { get; set; }
 
     private Scoring Scoring { get; }
 
@@ -30,23 +33,9 @@ public class Game
             Console.Clear();
             TableView.ShowBoard();
 
-            var fields = new List<UserSelection>();
-            do
-            {
-                try
-                {
-                    fields = ReceiveData.ReceiveField();
-                }
-                catch (BadInputException e)
-                {
-                    Console.WriteLine("Bad Input");
-                    
-                }
-                catch (NullInputException e)
-                {
-                    Console.WriteLine("Input cannot be null");
-                }
-            } while (fields == null);
+
+            var fields = DataReceiver.ReceiveField();
+
 
             var selectedFields = fields.ToList();
 

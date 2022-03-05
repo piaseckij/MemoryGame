@@ -1,12 +1,20 @@
-﻿using MemoryGame.Models;
+﻿using MemoryGame.GameLogic;
+using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.UserInterface;
 
 public class ReceiveData
 {
-    public static List<UserSelection> ReceiveField()
+    private readonly Boards _board;
+
+    public ReceiveData(Boards board)
     {
+        _board = board;
+    }
+    public  List<UserSelection> ReceiveField()
+    {
+
         List<UserSelection> output = new();
         var inputCorrect = true;
         do
@@ -16,15 +24,14 @@ public class ReceiveData
                 Console.WriteLine("Select Field: ");
                 var input = Console.ReadLine();
 
-                if (input.Length != 2)
-                {
-                    inputCorrect = false;
-                    break;
-                }
+                var inputVerification = new InputVerification(input,_board);
+                
 
                 var row = input[0];
                 var success = int.TryParse("" + input[1], out var column);
-                if (!success)
+
+
+                if (!success||!inputVerification.VerifyLength()||!inputVerification.VerifyOutOfRange(column, row))
                 {
                     Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
                     Thread.Sleep(1500);

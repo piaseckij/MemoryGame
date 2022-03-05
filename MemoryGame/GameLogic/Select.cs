@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MemoryGame.Exceptions;
-using MemoryGame.Models;
+﻿using MemoryGame.Models;
 
-namespace MemoryGame.GameLogic
+namespace MemoryGame.GameLogic;
+
+public static class Select
 {
-    public class Select
+    public static Word SelectField(UserSelection selection, Boards board)
     {
-
-        public static Word SelectField(UserSelection selection, Boards board)
+        switch (selection.Line)
         {
-            
-            if (selection.Line == 'A')
+            case 'A':
             {
-                board.Board[0][selection.Column-1].IsSelected=!board.Board[0][selection.Column-1].IsSelected;
+                if (!board.Board[0][selection.Column - 1].IsGuessed)
+                    board.Board[0][selection.Column - 1].IsSelected = !board.Board[0][selection.Column - 1].IsSelected;
+
                 return board.Board[0][selection.Column - 1];
             }
-
-            if (selection.Line == 'B')
+            case 'B':
             {
-                board.Board[1][selection.Column - 1].IsSelected=!board.Board[1][selection.Column - 1].IsSelected;
+                if (!board.Board[1][selection.Column - 1].IsGuessed)
+                    board.Board[1][selection.Column - 1].IsSelected = !board.Board[1][selection.Column - 1].IsSelected;
                 return board.Board[1][selection.Column - 1];
             }
-
-            throw new BadInputException("Bad input");
+            default:
+                return null;
         }
     }
 }
