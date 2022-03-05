@@ -1,5 +1,4 @@
-﻿using MemoryGame.Exceptions;
-using MemoryGame.Models;
+﻿using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.UserInterface;
@@ -9,47 +8,63 @@ public class ReceiveData
     public static List<UserSelection> ReceiveField()
     {
         List<UserSelection> output = new();
-        for (var i = 0; i < 2; i++)
+        var inputCorrect = true;
+        do
         {
-            Console.WriteLine("Select Field: ");
-            var input = Console.ReadLine();
-
-            if (input is null) throw new NullInputException("Input cannot be null");
-
-            var row = input[0];
-            var success = int.TryParse("" + input[1], out var column);
-            if (!success)
+            for (var i = 0; i < 2; i++)
             {
-                Console.WriteLine("Bad Input");
-                throw new BadInputException("Wrong Input");
-            }
+                Console.WriteLine("Select Field: ");
+                var input = Console.ReadLine();
 
-            output.Add(new UserSelection(row, column));
-        }
+                if (input.Length != 2)
+                {
+                    inputCorrect = false;
+                    break;
+                }
+
+                var row = input[0];
+                var success = int.TryParse("" + input[1], out var column);
+                if (!success)
+                {
+                    Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
+                    Thread.Sleep(1500);
+                    inputCorrect = false;
+                    break;
+                }
+
+                output.Add(new UserSelection(row, column));
+                inputCorrect = true;
+            }
+        } while (!inputCorrect);
 
         return output;
     }
 
     public static IDifficulty ReceiveDifficulty()
     {
-        Console.WriteLine("What Difficulty you want?");
-        Console.WriteLine("1. Easy");
-        Console.WriteLine("2. Hard");
-
-        var input = Console.ReadLine();
-
-        if (input is null)
+        var inputCorrect = false;
+        var level = 0;
+        do
         {
-            Console.WriteLine("Input cannot be null");
-            throw new NullInputException("Input cannot be empty");
-        }
+            Console.Clear();
+            Console.WriteLine("What Difficulty you want?");
+            Console.WriteLine("1. Easy");
+            Console.WriteLine("2. Hard");
 
-        var success = int.TryParse(input, out var level);
-        if (!success || level.ToString().Length! > 1)
-        {
-            Console.WriteLine("Wrong input");
-            throw new BadInputException("Wrong Input");
-        }
+            var input = Console.ReadLine();
+
+            var success = int.TryParse(input, out level);
+
+            if (success && level.ToString().Length == 1 && level == 1)
+            {
+                inputCorrect = true;
+            }
+            else
+            {
+                Console.WriteLine("Wrong input");
+                Thread.Sleep(1500);
+            }
+        } while (!inputCorrect);
 
         switch (level)
         {
@@ -57,8 +72,8 @@ public class ReceiveData
                 return new Easy();
             case 2:
                 return new Hard();
+            default:
+                return new Easy();
         }
-
-        throw new BadInputException("Wrong Input");
     }
 }

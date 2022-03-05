@@ -1,4 +1,5 @@
-﻿using MemoryGame.Models;
+﻿using MemoryGame.Exceptions;
+using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 using MemoryGame.UserInterface;
 
@@ -6,6 +7,8 @@ namespace MemoryGame.GameLogic;
 
 public class Game
 {
+    private bool Win;
+
     public Game()
     {
         Difficulty = ReceiveData.ReceiveDifficulty();
@@ -19,7 +22,6 @@ public class Game
     private IDifficulty Difficulty { get; }
     private Boards Board { get; }
     private TableView TableView { get; }
-    private bool Win = false;
 
     public void StartGame()
     {
@@ -27,7 +29,28 @@ public class Game
         {
             Console.Clear();
             TableView.ShowBoard();
-            var selectedFields = ReceiveData.ReceiveField();
+
+            var fields = new List<UserSelection>();
+            do
+            {
+                try
+                {
+                    fields = ReceiveData.ReceiveField();
+                }
+                catch (BadInputException e)
+                {
+                    Console.WriteLine("Bad Input");
+                    
+                }
+                catch (NullInputException e)
+                {
+                    Console.WriteLine("Input cannot be null");
+                }
+            } while (fields == null);
+
+            var selectedFields = fields.ToList();
+
+
             var selectedWords = Move.MakeMove(Board, selectedFields);
             Console.Clear();
             Scoring.StartScoring();
@@ -42,17 +65,17 @@ public class Game
                 TableView.ShowBoard();
                 Scoring.RemoveTry();
             }
-            else if(selectedWords[0].Equals(selectedWords[1]))
+            else if (selectedWords[0].Equals(selectedWords[1]))
             {
                 selectedWords[0].IsGuessed = true;
                 selectedWords[1].IsGuessed = true;
             }
 
-            Win=WinChecking.CheckWin(Board);
-        }while(Difficulty.Tries>0&&Win!=true);
+            Win = WinChecking.CheckWin(Board);
+        } while (Difficulty.Tries > 0 && Win != true);
+
         Console.Clear();
         Console.WriteLine($"Win in: {Scoring.StopScoring()} seconds");
         Console.WriteLine($"{Difficulty.Tries} Tries left");
-
     }
 }
