@@ -20,6 +20,6 @@ public class InputVerification
 
     public bool VerifyOutOfRange(int column, int row)
     {
-        return row is 0 or 1 && column < _board.Board[0].Count+1 && column < _board.Board[1].Count+1;
+        return row is 0 or 1 && column < _board.Board[0].Count + 1 && column < _board.Board[1].Count + 1;
     }
 }

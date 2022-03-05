@@ -15,10 +15,9 @@ public class Game
         TableView = new TableView(Board, Difficulty);
         Scoring = new Scoring(Difficulty);
         DataReceiver = new ReceiveData(Board);
-
     }
 
-    private ReceiveData DataReceiver { get; set; }
+    private ReceiveData DataReceiver { get; }
 
     private Scoring Scoring { get; }
 

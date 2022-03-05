@@ -23,15 +23,11 @@ public class TableView
         Console.WriteLine("---------------------\n");
 
         Console.Write("   ");
-        for (int j = 0; j < _board.Board[0].Count; j++)
-        {
-            
-            Console.Write((string)($"{1 + j}             "));
-        }
+        for (var j = 0; j < _board.Board[0].Count; j++) Console.Write((string) $"{1 + j}             ");
         Console.WriteLine();
         foreach (var row in _board.Board)
         {
-            Console.Write((char)('A'+index)+"  ");
+            Console.Write((char) ('A' + index) + "  ");
             foreach (var field in row)
                 if (field.IsGuessed || field.IsSelected)
                 {

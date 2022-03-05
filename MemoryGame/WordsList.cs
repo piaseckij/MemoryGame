@@ -7,7 +7,7 @@ public class WordsList
     private readonly List<string> _wordsFromFile = new();
 
 
-    public List<string> Words = new();
+    public readonly List<string> Words = new();
 
     public WordsList(IDifficulty difficulty)
     {
@@ -18,12 +18,12 @@ public class WordsList
 
     private void ReadWordsFromFile()
     {
-        //ToDo Zmienić ścieżkę
+
         foreach (var line in File.ReadAllLines(@"..\..\..\Resources\Words.txt"))
             _wordsFromFile.Add(line);
     }
 
-    public void SelectWordsForGame(IDifficulty difficulty)
+    private void SelectWordsForGame(IDifficulty difficulty)
     {
         var rnd = new Random();
         List<int> wordIndex = new();
@@ -40,7 +40,7 @@ public class WordsList
 
         for (var i = 0; i < difficulty.WordsNumber; i++)
         {
-            var currentIndex=wordIndex[i];
+            var currentIndex = wordIndex[i];
             Words.Add(_wordsFromFile[currentIndex]);
         }
     }
