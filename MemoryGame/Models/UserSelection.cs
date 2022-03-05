@@ -8,10 +8,10 @@ namespace MemoryGame.Models
 {
     public class UserSelection
     {
-        public char Line { get; set; }
+        public int Line { get; set; }
         public int Column { get; set; }
 
-        public UserSelection(char line, int column)
+        public UserSelection(int line, int column)
         {
             Line = line;
             Column = column;

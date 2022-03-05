@@ -18,8 +18,8 @@ public class InputVerification
         return _input.Length == 2;
     }
 
-    public bool VerifyOutOfRange(int column, char row)
+    public bool VerifyOutOfRange(int column, int row)
     {
-        return row is 'A' or 'B' && column < _board.Board[0].Count+1 && column < _board.Board[1].Count+1;
+        return row is 0 or 1 && column < _board.Board[0].Count+1 && column < _board.Board[1].Count+1;
     }
 }

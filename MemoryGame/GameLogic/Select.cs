@@ -4,25 +4,22 @@ namespace MemoryGame.GameLogic;
 
 public static class Select
 {
-    public static Word SelectField(UserSelection selection, Boards board)
+    public static List<Word> SelectField(List<UserSelection> userSelections, Boards board)
     {
-        switch (selection.Line)
-        {
-            case 'A':
-            {
-                if (!board.Board[0][selection.Column - 1].IsGuessed)
-                    board.Board[0][selection.Column - 1].IsSelected = !board.Board[0][selection.Column - 1].IsSelected;
+        var outputWords = new List<Word>();
 
-                return board.Board[0][selection.Column - 1];
-            }
-            case 'B':
-            {
-                if (!board.Board[1][selection.Column - 1].IsGuessed)
-                    board.Board[1][selection.Column - 1].IsSelected = !board.Board[1][selection.Column - 1].IsSelected;
-                return board.Board[1][selection.Column - 1];
-            }
-            default:
-                return null;
+        if (!board.Board[userSelections[0].Line][userSelections[0].Column-1].IsGuessed &&
+            !board.Board[userSelections[1].Line][userSelections[1].Column-1].IsGuessed)
+        {
+            board.Board[userSelections[0].Line][userSelections[0].Column-1].IsSelected =
+                !board.Board[userSelections[0].Line][userSelections[0].Column-1].IsSelected;
+
+            board.Board[userSelections[1].Line][userSelections[1].Column-1].IsSelected =
+                !board.Board[userSelections[1].Line][userSelections[1].Column-1].IsSelected;
         }
+        outputWords.Add(board.Board[userSelections[0].Line][userSelections[0].Column-1]);
+        outputWords.Add(board.Board[userSelections[1].Line][userSelections[1].Column-1]);
+
+        return outputWords;
     }
 }

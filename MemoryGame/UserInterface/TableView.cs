@@ -26,11 +26,17 @@ public class TableView
             foreach (var field in row)
                 if (field.IsGuessed || field.IsSelected)
                 {
-                    Console.Write(field.Text + " ");
+                    string output = field.Text.ToString();
+                    while (output.Length<14)
+                    {
+                        output=output + " ";
+                    }
+                    Console.Write(output);
+
                 }
                 else
                 {
-                    Console.Write("X" + " ");
+                    Console.Write("X" + "        ");
                 }
 
             Console.WriteLine();

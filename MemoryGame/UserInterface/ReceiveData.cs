@@ -23,15 +23,38 @@ public class ReceiveData
             {
                 Console.WriteLine("Select Field: ");
                 var input = Console.ReadLine();
+                var row = 0;
 
                 var inputVerification = new InputVerification(input,_board);
-                
 
-                var row = input[0];
+                switch (input[0])
+                {
+                    case 'A':
+                    {
+                        row = 0;
+                        break;
+                    }
+                    case 'B':
+                    {
+                        row = 1;
+                        break;
+                        
+                    }
+
+                }
+
+                if (!inputVerification.VerifyLength())
+                {
+                    Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
+                    Thread.Sleep(1500);
+                    inputCorrect = false;
+                    break;
+                }
+                
                 var success = int.TryParse("" + input[1], out var column);
 
 
-                if (!success||!inputVerification.VerifyLength()||!inputVerification.VerifyOutOfRange(column, row))
+                if (!success||!inputVerification.VerifyOutOfRange(column, row))
                 {
                     Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
                     Thread.Sleep(1500);
@@ -62,7 +85,7 @@ public class ReceiveData
 
             var success = int.TryParse(input, out level);
 
-            if (success && level.ToString().Length == 1 && level == 1)
+            if (success && level.ToString().Length == 1 && level is 1 or 2)
             {
                 inputCorrect = true;
             }

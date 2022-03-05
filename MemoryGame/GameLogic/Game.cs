@@ -48,8 +48,7 @@ public class Game
             if (!selectedWords[0].Equals(selectedWords[1]))
             {
                 Thread.Sleep(2000);
-                Select.SelectField(selectedFields[0], Board);
-                Select.SelectField(selectedFields[1], Board);
+                Select.SelectField(selectedFields, Board);
                 Console.Clear();
                 TableView.ShowBoard();
                 Scoring.RemoveTry();
