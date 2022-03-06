@@ -11,17 +11,12 @@ public class WordsList
 
     public WordsList(IDifficulty difficulty)
     {
-        ReadWordsFromFile();
+        _wordsFromFile = FileHandling.ReadWordsFromFile();
         SelectWordsForGame(difficulty);
     }
 
 
-    private void ReadWordsFromFile()
-    {
 
-        foreach (var line in File.ReadAllLines(@"..\..\..\Resources\Words.txt"))
-            _wordsFromFile.Add(line);
-    }
 
     private void SelectWordsForGame(IDifficulty difficulty)
     {

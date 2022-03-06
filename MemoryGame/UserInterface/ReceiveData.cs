@@ -1,4 +1,5 @@
-﻿using MemoryGame.Models;
+﻿using System.Runtime.CompilerServices;
+using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.UserInterface;
@@ -6,10 +7,12 @@ namespace MemoryGame.UserInterface;
 public class ReceiveData
 {
     private readonly Boards _board;
+    private InputVerification inputVerification;
 
     public ReceiveData(Boards board)
     {
         _board = board;
+        inputVerification = new InputVerification(_board);
     }
 
     public UserSelection ReceiveField()
@@ -19,10 +22,9 @@ public class ReceiveData
         do
         {
             Console.WriteLine("\nSelect Field: (ex.A1)");
-            var input = Console.ReadLine();
+            var input = Console.ReadLine().ToString();
             var row = 0;
 
-            var inputVerification = new InputVerification(input, _board);
 
             switch (input[0])
             {
@@ -38,7 +40,7 @@ public class ReceiveData
                 }
             }
 
-            if (!inputVerification.VerifyLength())
+            if (!inputVerification.VerifyLength(input))
             {
                 Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
                 Thread.Sleep(1500);
@@ -126,5 +128,23 @@ public class ReceiveData
 
             return false;
         } while (!inputCorrect);
+    }
+
+    public string AskForName()
+    {
+        bool success = false;
+        string name;
+
+        do
+        {
+            Console.WriteLine("What's your name?");
+
+            name = Console.ReadLine().ToString();
+
+            success = inputVerification.VerifyName(name);
+
+        } while (!success);
+
+        return name;
     }
 }
