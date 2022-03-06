@@ -1,4 +1,5 @@
-﻿using MemoryGame.Models;
+﻿using System.Net.Mime;
+using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 using MemoryGame.UserInterface;
 
@@ -32,30 +33,32 @@ public class Game
             Console.Clear();
             TableView.ShowBoard();
 
-
-            var fields = DataReceiver.ReceiveField();
-
-
-            var selectedFields = fields.ToList();
-
-
-            var selectedWords = Move.MakeMove(Board, selectedFields);
+            var firstField= DataReceiver.ReceiveField();
+            
+            var firstWord = Move.MakeMove(Board, firstField);
             Console.Clear();
             Scoring.StartScoring();
             TableView.ShowBoard();
+            var secondField = DataReceiver.ReceiveField();
+            var secondWord = Move.MakeMove(Board, secondField);
+            Console.Clear();
+
+            TableView.ShowBoard();
             Thread.Sleep(2000);
-            if (!selectedWords[0].Equals(selectedWords[1]))
+            if (!firstWord.Equals(secondWord))
             {
                 Thread.Sleep(2000);
-                Select.SelectField(selectedFields, Board);
+                Select.SelectField(firstField, Board);
+                Select.SelectField(secondField, Board);
+
                 Console.Clear();
                 TableView.ShowBoard();
                 Scoring.RemoveTry();
             }
-            else if (selectedWords[0].Equals(selectedWords[1]))
+            else if (firstWord.Equals(secondWord))
             {
-                selectedWords[0].IsGuessed = true;
-                selectedWords[1].IsGuessed = true;
+                firstWord.IsGuessed = true;
+                secondWord.IsGuessed = true;
             }
 
             Win = WinChecking.CheckWin(Board);
@@ -64,5 +67,9 @@ public class Game
         Console.Clear();
         Console.WriteLine($"Win in: {Scoring.StopScoring()} seconds");
         Console.WriteLine($"{Difficulty.Tries} Tries left");
+
+
+        
+            
     }
 }

@@ -4,10 +4,8 @@ namespace MemoryGame.GameLogic;
 
 public static class Move
 {
-    public static List<Word> MakeMove(Boards board, List<UserSelection> userSelections)
+    public static Word MakeMove(Boards board, UserSelection userSelections)
     {
-        var selectedWords = Select.SelectField(userSelections, board);
-
-        return selectedWords;
+        return Select.SelectField(userSelections, board);
     }
 }

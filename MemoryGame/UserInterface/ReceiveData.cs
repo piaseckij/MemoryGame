@@ -12,56 +12,51 @@ public class ReceiveData
         _board = board;
     }
 
-    public List<UserSelection> ReceiveField()
+    public UserSelection ReceiveField()
     {
-        List<UserSelection> output = new();
         var inputCorrect = true;
+        UserSelection output;
         do
         {
-            for (var i = 0; i < 2; i++)
+            Console.WriteLine("\nSelect Field: (ex.A1)");
+            var input = Console.ReadLine();
+            var row = 0;
+
+            var inputVerification = new InputVerification(input, _board);
+
+            switch (input[0])
             {
-                Console.WriteLine("\nSelect Field: (ex.A1)");
-                var input = Console.ReadLine();
-                var row = 0;
-
-                var inputVerification = new InputVerification(input, _board);
-
-                switch (input[0])
+                case 'A':
                 {
-                    case 'A':
-                    {
-                        row = 0;
-                        break;
-                    }
-                    case 'B':
-                    {
-                        row = 1;
-                        break;
-                    }
-                }
-
-                if (!inputVerification.VerifyLength())
-                {
-                    Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
-                    Thread.Sleep(1500);
-                    inputCorrect = false;
+                    row = 0;
                     break;
                 }
-
-                var success = int.TryParse("" + input[1], out var column);
-
-
-                if (!success || !inputVerification.VerifyOutOfRange(column, row))
+                case 'B':
                 {
-                    Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
-                    Thread.Sleep(1500);
-                    inputCorrect = false;
+                    row = 1;
                     break;
                 }
-
-                output.Add(new UserSelection(row, column));
-                inputCorrect = true;
             }
+
+            if (!inputVerification.VerifyLength())
+            {
+                Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
+                Thread.Sleep(1500);
+                inputCorrect = false;
+            }
+
+            var success = int.TryParse("" + input[1], out var column);
+
+
+            if (!success || !inputVerification.VerifyOutOfRange(column, row))
+            {
+                Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
+                Thread.Sleep(1500);
+                inputCorrect = false;
+            }
+
+            output = new UserSelection(row, column);
+            inputCorrect = true;
         } while (!inputCorrect);
 
         return output;
@@ -102,5 +97,34 @@ public class ReceiveData
             default:
                 return new Easy();
         }
+    }
+
+    public static bool RestartQuestion()
+    {
+        var inputCorrect = false;
+        
+        do
+        {
+            Console.WriteLine("Do you want to try again?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
+
+            var input = Console.ReadLine();
+
+            var success = int.TryParse(input, out var afterParse);
+
+            if (success && afterParse.ToString().Length == 1 && afterParse is 1 or 2)
+            {
+                inputCorrect = true;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Wrong input");
+                Thread.Sleep(1500);
+            }
+
+            return false;
+        } while (!inputCorrect);
     }
 }
