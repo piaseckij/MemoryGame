@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MemoryGame.Models;
+﻿namespace MemoryGame;
 
-namespace MemoryGame
+public static class FileHandling
 {
-    public class FileHandling
+    public static List<string> ReadWordsFromFile()
     {
+        return File.ReadAllLines(@"..\..\..\Resources\Words.txt").ToList();
+    }
 
-        public static List<string> ReadWordsFromFile()
-        {
-            List<string> _wordsFromFile = new();
+    public static void SaveScore(string name, int guessingTime, int guessingTries)
+    {
+        var path = @"..\..\..\Resources\HighScores.txt";
 
-            foreach (var line in File.ReadAllLines(@"..\..\..\Resources\Words.txt"))
-                _wordsFromFile.Add(line);
+        var line = $"{name}|{DateTime.Now.Date}|{guessingTime}|{guessingTries}";
 
-            return _wordsFromFile;
-        }
+        File.AppendAllLines(path, new[] {line});
+    }
 
-       
+    public static List<String> ReadScores()
+    {
+        var path = @"..\..\..\Resources\HighScores.txt";
+
+        return File.ReadAllLines(path).ToList();
     }
 }

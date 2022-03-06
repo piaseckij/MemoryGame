@@ -64,12 +64,14 @@ public class Game
             Win = WinChecking.CheckWin(Board);
         } while (Difficulty.Tries > 0 && Win != true);
 
+        var time = Scoring.StopScoring();
+        var tries = Difficulty.Tries;
+
         Console.Clear();
-        Console.WriteLine($"Win in: {Scoring.StopScoring()} seconds");
-        Console.WriteLine($"{Difficulty.Tries} Tries left");
-
-
+        Console.WriteLine($"Win in: {time} seconds");
+        Console.WriteLine($"{tries} Tries left");
         
+        FileHandling.SaveScore(DataReceiver.AskForName(),time,tries);
             
     }
 }

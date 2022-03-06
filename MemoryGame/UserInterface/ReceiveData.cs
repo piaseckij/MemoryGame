@@ -114,8 +114,10 @@ public class ReceiveData
             var input = Console.ReadLine();
 
             var success = int.TryParse(input, out var afterParse);
+            if (afterParse is not 1 or 2)
+                return false;
 
-            if (success && afterParse.ToString().Length == 1 && afterParse is 1 or 2)
+            if (success && afterParse.ToString().Length == 1)
             {
                 inputCorrect = true;
                 return true;
@@ -137,7 +139,7 @@ public class ReceiveData
 
         do
         {
-            Console.WriteLine("What's your name?");
+            Console.WriteLine("\nWhat's your name?");
 
             name = Console.ReadLine().ToString();
 
