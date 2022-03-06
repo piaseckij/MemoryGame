@@ -36,5 +36,5 @@ public class Boards
 
             Board[i] = temp;
         }
-    }
+    } 
 }

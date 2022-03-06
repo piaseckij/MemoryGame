@@ -8,4 +8,4 @@ public static class Move
     {
         return Select.SelectField(userSelections, board);
     }
-}
+} 

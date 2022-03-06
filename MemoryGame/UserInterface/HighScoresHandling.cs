@@ -1,28 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MemoryGame.UserInterface;
 
-namespace MemoryGame.UserInterface
+public static class HighScoresHandling
 {
-    public class HighScoresHandling
+    public static void WriteScores()
     {
-        public static void WriteScores( )
+        Console.WriteLine("\n\n!HIGH SCORES!\n\n");
+
+        var scoresFromFile = FileHandling.ReadScores();
+        foreach (var line in scoresFromFile)
         {
-            Console.WriteLine("\n\n!HIGH SCORES!\n\n");
+            var subs = line.Split("|");
+            foreach (var sub in subs) Console.Write(sub + " ");
 
-            var scoresFromFile = FileHandling.ReadScores();
-            foreach (var line in scoresFromFile)
-            {
-                string[] subs = line.Split("|");
-                foreach (var sub in subs)
-                {
-                    Console.Write(sub+" ");
-                }
-
-                Console.WriteLine();
-            }
+            Console.WriteLine();
         }
     }
 }

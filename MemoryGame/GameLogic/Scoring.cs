@@ -13,7 +13,7 @@ public class Scoring
         Difficulty = difficulty;
     }
 
-    public IDifficulty Difficulty { get; set; }
+    private IDifficulty Difficulty { get; set; }
 
     public void StartScoring()
     {

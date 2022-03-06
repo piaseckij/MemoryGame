@@ -6,6 +6,6 @@ public static class WinChecking
 {
     public static bool CheckWin(Boards board)
     {
-        return board.Board.All(row => row.All(field => field.IsGuessed != false));
+        return board.Board.All(row => row.All(field => field.IsGuessed));
     }
 }

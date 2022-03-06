@@ -11,5 +11,5 @@ public class Difficulty : IDifficulty
 {
     public int Tries { get; set; }
     public int WordsNumber { get; set; }
-    public string Name { get; }
+    public string Name { get; } 
 }

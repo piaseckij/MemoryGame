@@ -7,7 +7,7 @@ public class InputVerification
     private readonly Boards _board;
 
 
-    public InputVerification( Boards board)
+    public InputVerification(Boards board)
     {
         _board = board;
     }
@@ -24,6 +24,6 @@ public class InputVerification
 
     public bool VerifyName(string name)
     {
-        return name is { Length: < 25 };
+        return name is {Length: < 25};
     }
 }

@@ -16,8 +16,6 @@ public class WordsList
     }
 
 
-
-
     private void SelectWordsForGame(IDifficulty difficulty)
     {
         var rnd = new Random();
@@ -26,11 +24,9 @@ public class WordsList
         do
         {
             var index = rnd.Next(1, 100);
-            if (!wordIndex.Contains(index))
-            {
-                wordIndex.Add(index);
-                k++;
-            }
+            if (wordIndex.Contains(index)) continue;
+            wordIndex.Add(index);
+            k++;
         } while (k < difficulty.WordsNumber);
 
         for (var i = 0; i < difficulty.WordsNumber; i++)

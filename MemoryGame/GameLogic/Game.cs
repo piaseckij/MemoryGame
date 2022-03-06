@@ -1,5 +1,4 @@
-﻿using System.Net.Mime;
-using MemoryGame.Models;
+﻿using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 using MemoryGame.UserInterface;
 
@@ -33,8 +32,8 @@ public class Game
             Console.Clear();
             TableView.ShowBoard();
 
-            var firstField= DataReceiver.ReceiveField();
-            
+            var firstField = DataReceiver.ReceiveField();
+
             var firstWord = Move.MakeMove(Board, firstField);
             Console.Clear();
             Scoring.StartScoring();
@@ -70,8 +69,7 @@ public class Game
         Console.Clear();
         Console.WriteLine($"Win in: {time} seconds");
         Console.WriteLine($"{tries} Tries left");
-        
-        FileHandling.SaveScore(DataReceiver.AskForName(),time,tries);
-            
+
+        FileHandling.SaveScore(DataReceiver.AskForName(), time, tries);
     }
 }

@@ -16,7 +16,7 @@ public static class FileHandling
         File.AppendAllLines(path, new[] {line});
     }
 
-    public static List<String> ReadScores()
+    public static List<string> ReadScores()
     {
         var path = @"..\..\..\Resources\HighScores.txt";
 

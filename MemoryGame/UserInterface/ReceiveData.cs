@@ -1,18 +1,15 @@
-﻿using System.Runtime.CompilerServices;
-using MemoryGame.Models;
+﻿using MemoryGame.Models;
 using MemoryGame.Models.Difficulties;
 
 namespace MemoryGame.UserInterface;
 
 public class ReceiveData
 {
-    private readonly Boards _board;
-    private InputVerification inputVerification;
+    private readonly InputVerification _inputVerification;
 
     public ReceiveData(Boards board)
     {
-        _board = board;
-        inputVerification = new InputVerification(_board);
+        _inputVerification = new InputVerification(board);
     }
 
     public UserSelection ReceiveField()
@@ -22,25 +19,16 @@ public class ReceiveData
         do
         {
             Console.WriteLine("\nSelect Field: (ex.A1)");
-            var input = Console.ReadLine().ToString();
-            var row = 0;
+            var input = Console.ReadLine();
 
-
-            switch (input[0])
+            var row = input[0] switch
             {
-                case 'A':
-                {
-                    row = 0;
-                    break;
-                }
-                case 'B':
-                {
-                    row = 1;
-                    break;
-                }
-            }
+                'A' => 0,
+                'B' => 1,
+                _ => 0
+            };
 
-            if (!inputVerification.VerifyLength(input))
+            if (!_inputVerification.VerifyLength(input))
             {
                 Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
                 Thread.Sleep(1500);
@@ -50,7 +38,7 @@ public class ReceiveData
             var success = int.TryParse("" + input[1], out var column);
 
 
-            if (!success || !inputVerification.VerifyOutOfRange(column, row))
+            if (!success || !_inputVerification.VerifyOutOfRange(column, row))
             {
                 Console.WriteLine("Bad Input. Try Uppercase and number ex. A1");
                 Thread.Sleep(1500);
@@ -104,7 +92,7 @@ public class ReceiveData
     public static bool RestartQuestion()
     {
         var inputCorrect = false;
-        
+
         do
         {
             Console.WriteLine("Do you want to try again?");
@@ -122,11 +110,9 @@ public class ReceiveData
                 inputCorrect = true;
                 return true;
             }
-            else
-            {
-                Console.WriteLine("Wrong input");
-                Thread.Sleep(1500);
-            }
+
+            Console.WriteLine("Wrong input");
+            Thread.Sleep(1500);
 
             return false;
         } while (!inputCorrect);
@@ -134,17 +120,16 @@ public class ReceiveData
 
     public string AskForName()
     {
-        bool success = false;
+        var success = false;
         string name;
 
         do
         {
             Console.WriteLine("\nWhat's your name?");
 
-            name = Console.ReadLine().ToString();
+            name = Console.ReadLine();
 
-            success = inputVerification.VerifyName(name);
-
+            success = _inputVerification.VerifyName(name);
         } while (!success);
 
         return name;

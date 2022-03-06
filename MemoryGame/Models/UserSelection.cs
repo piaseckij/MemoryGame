@@ -16,5 +16,4 @@ public class UserSelection
     {
         return Line == other.Line && Column == other.Column;
     }
-
 }
